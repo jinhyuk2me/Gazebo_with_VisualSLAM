@@ -1,0 +1,50 @@
+<?xml version='1.0' ?>
+
+<launch>
+    <!-- 기본 인수들 -->
+    <arg name="robot_name" default="pinky"/>
+    <arg name="world_name" default="factory_L1.world"/>
+    <arg name="world" default="$(find-pkg-share hello_gazebo_bringup)/worlds/$(var world_name)"/>
+    <arg name="bridge_params" default="$(find-pkg-share hello_gazebo_bringup)/params/vehicle_bridge.yaml"/>
+    <arg name="x" default="14.0"/>
+    <arg name="y" default="-16.0"/>
+    <arg name="z" default="0.3"/>
+    <!-- Gazebo 리소스 경로 설정 -->
+    <set_env name="GZ_SIM_RESOURCE_PATH" value="$(find-pkg-share hello_gazebo_bringup)/models:$(find-pkg-share hello_gazebo_bringup):/$(env HOME)/.gazebo/models"/>
+    <set_env name="GAZEBO_MODEL_PATH" value="$(find-pkg-share hello_gazebo_bringup)/models:$(find-pkg-share hello_gazebo_bringup):/$(env HOME)/.gazebo/models"/>
+
+    <!-- 1. Gazebo 시뮬레이션 서버 실행 (헤드리스) -->
+    <include file="$(find-pkg-share ros_gz_sim)/launch/gz_sim.launch.py">
+        <arg name='gz_args' value='-r -s -v4 $(var world)'/>
+        <arg name='on_exit_shutdown' value='true'/>
+    </include>
+
+    <!-- 2. Gazebo GUI 실행 -->
+    <include file="$(find-pkg-share ros_gz_sim)/launch/gz_sim.launch.py">
+        <arg name='gz_args' value='-g -v4'/>
+    </include>
+
+    <!-- 3. 로봇 모델 퍼블리셔 (가장 먼저) -->
+    <node pkg="robot_state_publisher" exec="robot_state_publisher" name="robot_state_publisher" output="screen">
+        <param name="robot_description" value="$(command 'xacro $(find-pkg-share hello_gazebo_description)/urdf/robot.urdf.xacro')"/>
+        <param name="use_sim_time" value="true"/>
+    </node>
+
+    <!-- 4. 지연 후 로봇 스폰 -->
+    <executable cmd="sleep 3" output="screen"/>
+    
+    <node pkg="ros_gz_sim" exec="create" name='spawn_vehicle' output='screen' 
+        args="-name $(var robot_name) -topic robot_description -x $(var x) -y $(var y) -z $(var z)">
+        <param name='use_sim_time' value='True'/>
+    </node>
+
+    <!-- 5. ROS-Gazebo 브리지 -->
+    <node pkg="ros_gz_bridge" exec="parameter_bridge" name='parameter_bridge' output='screen' 
+        args="--ros-args -p config_file:=$(var bridge_params)">
+        <param name='use_sim_time' value='True'/>
+    </node>
+
+    <!-- 6. 카메라 이미지는 ros_gz_bridge로 처리 -->
+
+
+</launch>

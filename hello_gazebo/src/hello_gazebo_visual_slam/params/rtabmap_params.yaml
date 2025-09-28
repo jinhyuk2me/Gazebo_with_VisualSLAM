@@ -1,0 +1,58 @@
+rtabmap:
+  ros__parameters:
+    # 기본 설정
+    database_path: "~/.ros/rtabmap.db"
+    
+    # 메모리 관리
+    Mem/RehearsalSimilarity: "0.30"
+    Mem/ImagePreDecimation: "2"
+    Mem/ImagePostDecimation: "1"
+    
+    # 특징점 검출
+    Kp/MaxFeatures: "400"
+    Kp/WordsPerImage: "200"
+    Vis/MinInliers: "15"
+    Vis/InlierDistance: "0.1"
+    
+    # 루프 클로저 검출
+    Rtabmap/TimeThr: "0"
+    Rtabmap/DetectionRate: "1"
+    Rtabmap/LoopClosureReextractFeatures: "false"
+    
+    # RGB-D 설정
+    RGBD/Enabled: "true"
+    RGBD/LinearUpdate: "0.1"
+    RGBD/AngularUpdate: "0.1"
+    RGBD/OptimizeFromGraphEnd: "false"
+    
+    # Grid map 생성
+    Grid/FromDepth: "true"
+    Grid/CellSize: "0.05"
+    Grid/RangeMax: "4.0"
+    Grid/MaxObstacleHeight: "2.0"
+    Grid/MaxGroundHeight: "0.20"
+    
+    # 최적화 설정
+    Optimizer/Iterations: "10"
+    Optimizer/Slam2D: "false"
+    Optimizer/Strategy: "0"
+    
+    # 시각화
+    Rtabmap/PublishStats: "true"
+    Rtabmap/PublishLastSignature: "true"
+    Rtabmap/PublishPdf: "true"
+    Rtabmap/PublishLikelihood: "false"
+    
+    # 성능 최적화 (실습용)
+    Rtabmap/ImageBufferSize: "1"
+    Kp/DetectorStrategy: "0"  # SURF
+    Vis/FeatureType: "0"      # SURF
+    
+    # 깊이 이미지 필터링
+    RGBD/ProximityBySpace: "true"
+    RGBD/ProximityMaxGraphDepth: "50"
+    RGBD/LocalRadius: "1.0"
+    
+    # 메모리 제한 (실습용)
+    Rtabmap/MemoryThr: "0"
+    Rtabmap/MaxRetrieved: "2"

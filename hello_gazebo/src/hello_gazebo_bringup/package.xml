@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schemaLocation="http://download.ros.org/schema/package_format3.xsd"?>
+<package format="3">
+  <name>hello_gazebo_bringup</name>
+  <version>0.0.0</version>
+  <description>Bringup package for Hello Gazebo demos</description>
+  <maintainer email="164614732+jinhyuk2me@users.noreply.github.com">addinedu</maintainer>
+  <license>Apache-2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <exec_depend>hello_gazebo_description</exec_depend>
+  <exec_depend>hello_gazebo_slam</exec_depend>
+  <exec_depend>hello_gazebo_navigation</exec_depend>
+  <exec_depend>teleop_twist_keyboard</exec_depend>
+  
+  <!-- Gazebo 관련 의존성들 (hello_gazebo_gazebo에서 이동) -->
+  <exec_depend>ros_gz_sim</exec_depend>
+  <exec_depend>ros_gz_bridge</exec_depend>
+  <exec_depend>ros_gz_image</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>xacro</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

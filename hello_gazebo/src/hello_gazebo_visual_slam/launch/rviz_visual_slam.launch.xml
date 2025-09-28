@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- RViz Visual SLAM 시각화 런치 파일 -->
+  
+  <!-- RViz 설정 파일 경로 -->
+  <arg name="rviz_config_file" default="$(find-pkg-share hello_gazebo_visual_slam)/config/visual_slam.rviz"/>
+  
+  <!-- RViz 노드 실행 -->
+  <node pkg="rviz2" exec="rviz2" name="rviz2" output="screen"
+        args="-d $(var rviz_config_file)">
+    <param name="use_sim_time" value="true"/>
+  </node>
+  
+</launch>

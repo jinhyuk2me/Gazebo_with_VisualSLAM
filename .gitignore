@@ -1,0 +1,36 @@
+# ROS 2 Colcon 빌드 결과물들
+build/
+install/
+log/
+ros_gz/
+gz-sim/
+rtabmap/
+rtabmap_ros/
+
+# ROS 2 관련 임시 파일들
+*.pyc
+__pycache__/
+*.egg-info/
+
+# IDE 관련 파일들
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS 관련 파일들
+.DS_Store
+Thumbs.db
+
+# 백업 파일들
+*.bak
+*.orig
+*.tmp
+
+# Gazebo 관련
+.gazebo/
+
+# 기타 임시 파일들
+*.log
+*.pid

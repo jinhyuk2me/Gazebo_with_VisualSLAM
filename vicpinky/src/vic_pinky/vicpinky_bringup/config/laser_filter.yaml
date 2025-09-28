@@ -1,0 +1,9 @@
+/**:
+  ros__parameters:
+    filter1:
+      name: polygon_filter
+      type: laser_filters/LaserScanPolygonFilter
+      params:
+        polygon_frame: base_link
+        polygon: '[[0.2, -0.4], [0.2, 0.4], [-0.6, 0.4], [-0.6, -0.4]]'
+        invert: false

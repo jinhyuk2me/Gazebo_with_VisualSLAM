@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- RTAB-Map Visual SLAM Launch File (Turtlebot3 예제 기반) -->
+  
+  <!-- RTAB-Map SLAM 노드 -->
+  <node pkg="rtabmap_slam" exec="rtabmap" name="rtabmap" output="screen">
+    <!-- 기본 파라미터 (Turtlebot3 검증된 설정) -->
+    <param name="frame_id" value="base_footprint"/>
+    <param name="use_sim_time" value="true"/>
+    <param name="subscribe_depth" value="true"/>
+    <param name="use_action_for_goal" value="true"/>
+    
+    <!-- 2D SLAM 파라미터 -->
+    <param name="Reg/Force3DoF" value="true" type="str"/>
+    <param name="Optimizer/GravitySigma" value="0" type="str"/>
+    
+    <!-- Grid 맵 파라미터 (검증된 설정) -->
+    <param name="Grid/RayTracing" value="true" type="str"/>
+    <param name="Grid/3D" value="false" type="str"/>
+    <param name="Grid/RangeMax" value="3" type="str"/>
+    <param name="Grid/NormalsSegmentation" value="false" type="str"/>
+    <param name="Grid/MaxGroundHeight" value="0.05" type="str"/>
+    <param name="Grid/MaxObstacleHeight" value="0.4" type="str"/>
+    
+    <!-- 토픽 리맵핑 (우리 카메라에 맞게) -->
+    <remap from="rgb/image" to="/camera/image_raw"/>
+    <remap from="rgb/camera_info" to="/camera/camera_info"/>
+    <remap from="depth/image" to="/camera/depth/image_raw"/>
+    <remap from="odom" to="/odom"/>
+    
+    <!-- 데이터베이스 삭제 시작 -->
+    <param name="delete_db_on_start" value="true"/>
+
+    <!-- 맵 발행 파라미터 -->
+    <param name="Grid/Published" value="true" type="str"/>
+    <param name="publish_tf" value="true"/>
+  </node>
+  
+  <!-- RTAB-Map 시각화 -->
+  <node pkg="rtabmap_viz" exec="rtabmap_viz" name="rtabmap_viz" output="screen">
+    <param name="frame_id" value="base_footprint"/>
+    <param name="use_sim_time" value="true"/>
+    <param name="subscribe_depth" value="true"/>
+    <param name="use_action_for_goal" value="true"/>
+    
+    <!-- 토픽 리맵핑 -->
+    <remap from="rgb/image" to="/camera/image_raw"/>
+    <remap from="rgb/camera_info" to="/camera/camera_info"/>
+    <remap from="depth/image" to="/camera/depth/image_raw"/>
+    <remap from="odom" to="/odom"/>
+  </node>
+  
+  <!-- TF 변환 -->
+  <node pkg="tf2_ros" exec="static_transform_publisher" name="camera_base_footprint"
+        args="0.0 0.0 0.0 0.0 0.0 0.0 base_footprint base_link"/>
+  <node pkg="tf2_ros" exec="static_transform_publisher" name="camera_base_link"
+        args="0.0 0.0 0.0 0.0 0.0 0.0 base_link camera_link"/>
+  <node pkg="tf2_ros" exec="static_transform_publisher" name="camera_optical_frame"
+        args="0.0 0.0 0.0 -1.5707963267948966 0.0 -1.5707963267948966 camera_link camera_rgb_optical_frame"/>
+  <node pkg="tf2_ros" exec="static_transform_publisher" name="gazebo_camera_frame"
+        args="0.0 0.0 0.0 0.0 0.0 0.0 camera_rgb_optical_frame pinky/base_footprint/camera"/>
+  
+</launch>
