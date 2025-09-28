@@ -1,3 +1,5 @@
+![](https://github.com/jinhyuk2me/Gazebo_with_VisualSLAM/blob/main/assets/rtabmap.gif?raw=true)
+
 # Gazebo_with_VisualSLAM
 
 Visual SLAM robot simulation project using ROS2 Jazzy and Gazebo.
@@ -64,6 +66,8 @@ rtabmap-export --db ~/.ros/rtabmap.db --format pgm my_visual_map.pgm
 ```
 
 ### 📊 Visual SLAM Monitoring
+
+![](https://github.com/jinhyuk2me/Gazebo_with_VisualSLAM/blob/main/assets/rviz.gif?raw=true)
 
 #### Elements visible in Visual SLAM RViz:
 - 🎥 **Camera View**: RGB camera feed
