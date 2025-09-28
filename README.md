@@ -67,7 +67,7 @@ rtabmap-export --db ~/.ros/rtabmap.db --format pgm my_visual_map.pgm
 
 ### 📊 Visual SLAM Monitoring
 
-![](https://github.com/jinhyuk2me/Gazebo_with_VisualSLAM/blob/main/assets/rtabmap.gif?raw=true)
+<img src="https://github.com/jinhyuk2me/Gazebo_with_VisualSLAM/blob/main/assets/rtabmap.gif?raw=true" width="100%"/>
 
 #### Elements visible in Visual SLAM RViz:
 - 🎥 **Camera View**: RGB camera feed
